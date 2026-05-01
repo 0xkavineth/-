@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ลูกชิ้นทอด 🍡</title>
+<link href="https://fonts.googleapis.com/css2?family=Mitr:wght@400;600;700&family=Kanit:wght@800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --brown: #8B4513;
+    --golden: #F4A835;
+    --cream: #FFF8E7;
+    --orange: #FF6B35;
+    --pink: #FFB5C8;
+    --dark: #3D1A00;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    min-height: 100vh;
+    background: var(--cream);
+    font-family: 'Mitr', sans-serif;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-image:
+      radial-gradient(circle at 20% 20%, #FFE0B2 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, #FFCCBC 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, #FFF8E7 0%, transparent 70%);
+  }
+
+  /* Floating decorative meatballs */
+  .bg-ball {
+    position: fixed;
+    border-radius: 50%;
+    opacity: 0.12;
+    pointer-events: none;
+    animation: floatBg linear infinite;
+  }
+
+  @keyframes floatBg {
+    0% { transform: translateY(110vh) rotate(0deg); }
+    100% { transform: translateY(-20vh) rotate(360deg); }
+  }
+
+  .main-card {
+    background: white;
+    border-radius: 40px;
+    padding: 50px 60px;
+    text-align: center;
+    box-shadow:
+      0 20px 60px rgba(139,69,19,0.15),
+      0 4px 20px rgba(244,168,53,0.2),
+      inset 0 1px 0 rgba(255,255,255,0.9);
+    border: 3px solid rgba(244,168,53,0.3);
+    max-width: 520px;
+    width: 90%;
+    position: relative;
+    z-index: 10;
+    animation: cardAppear 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  }
+
+  @keyframes cardAppear {
+    from { opacity: 0; transform: scale(0.7) translateY(30px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  /* Main meatball skewer illustration */
+  .meatball-scene {
+    position: relative;
+    height: 160px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .skewer {
+    width: 220px;
+    height: 12px;
+    background: linear-gradient(90deg, #8B6914, #D4A017, #8B6914);
+    border-radius: 6px;
+    position: relative;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+  }
+
+  .ball {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    cursor: default;
+    animation: wobble 3s ease-in-out infinite;
+  }
+
+  .ball::after {
+    content: '';
+    width: 14px;
+    height: 14px;
+    background: rgba(255,255,255,0.35);
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+    left: 12px;
+  }
+
+  .ball-1 {
+    background: radial-gradient(circle at 35% 30%, #CD853F, #8B4513 70%);
+    left: -10px;
+    transform: translateY(-50%);
+    width: 64px; height: 64px;
+    box-shadow: 0 6px 16px rgba(139,69,19,0.4), inset 0 -4px 8px rgba(0,0,0,0.2);
+    animation-delay: 0s;
+  }
+  .ball-2 {
+    background: radial-gradient(circle at 35% 30%, #D2691E, #6B2E0A 70%);
+    left: 60px;
+    transform: translateY(-50%);
+    width: 58px; height: 58px;
+    box-shadow: 0 6px 16px rgba(139,69,19,0.4), inset 0 -4px 8px rgba(0,0,0,0.2);
+    animation-delay: 0.4s;
+  }
+  .ball-3 {
+    background: radial-gradient(circle at 35% 30%, #C8622A, #7A3210 70%);
+    left: 118px;
+    transform: translateY(-50%);
+    width: 62px; height: 62px;
+    box-shadow: 0 6px 16px rgba(139,69,19,0.4), inset 0 -4px 8px rgba(0,0,0,0.2);
+    animation-delay: 0.8s;
+  }
+
+  @keyframes wobble {
+    0%, 100% { transform: translateY(-50%) rotate(-3deg); }
+    50% { transform: translateY(-60%) rotate(3deg); }
+  }
+
+  /* Steam effect */
+  .steam {
+    position: absolute;
+    top: 0px;
+    width: 6px;
+    height: 30px;
+    border-radius: 3px;
+    animation: steamRise 2s ease-in infinite;
+    opacity: 0;
+  }
+  .steam-1 { left: 16px; background: rgba(244,168,53,0.4); animation-delay: 0s; }
+  .steam-2 { left: 80px; background: rgba(244,168,53,0.35); animation-delay: 0.5s; }
+  .steam-3 { left: 144px; background: rgba(244,168,53,0.4); animation-delay: 1s; }
+
+  @keyframes steamRise {
+    0% { opacity: 0; transform: translateY(0) scaleX(1); }
+    30% { opacity: 0.7; }
+    100% { opacity: 0; transform: translateY(-40px) scaleX(0.3); }
+  }
+
+  /* Sauce drips */
+  .sauce-dot {
+    position: absolute;
+    bottom: 20px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #FF6B35;
+    animation: drip 3s ease-in infinite;
+    opacity: 0;
+  }
+  .sauce-dot:nth-child(1) { left: 25px; animation-delay: 1s; }
+  .sauce-dot:nth-child(2) { left: 88px; animation-delay: 1.8s; }
+  .sauce-dot:nth-child(3) { left: 150px; animation-delay: 0.5s; }
+
+  @keyframes drip {
+    0% { opacity: 0; transform: translateY(-10px); }
+    20% { opacity: 1; }
+    100% { opacity: 0; transform: translateY(30px) scaleY(1.5); }
+  }
+
+  /* Face on balls */
+  .ball-1::before { content: '😊'; font-size: 22px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+  .ball-2::before { content: '🤩'; font-size: 20px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+  .ball-3::before { content: '😋'; font-size: 21px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+
+  .question-text {
+    font-family: 'Kanit', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--dark);
+    line-height: 1.4;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 0 rgba(244,168,53,0.3);
+  }
+
+  .sub-text {
+    font-size: 0.9rem;
+    color: #B07040;
+    margin-bottom: 35px;
+    font-weight: 400;
+  }
+
+  .btn-group {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 70px;
+  }
+
+  .btn {
+    padding: 16px 44px;
+    border: none;
+    border-radius: 50px;
+    font-family: 'Kanit', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+    position: relative;
+    letter-spacing: 1px;
+  }
+
+  .btn-yes {
+    background: linear-gradient(135deg, #FF6B35, #F4A835);
+    color: white;
+    box-shadow: 0 8px 25px rgba(255,107,53,0.4), 0 2px 8px rgba(0,0,0,0.1);
+    animation: yesGlow 2s ease-in-out infinite;
+  }
+
+  @keyframes yesGlow {
+    0%, 100% { box-shadow: 0 8px 25px rgba(255,107,53,0.4), 0 2px 8px rgba(0,0,0,0.1); }
+    50% { box-shadow: 0 8px 35px rgba(255,107,53,0.7), 0 2px 8px rgba(0,0,0,0.1); }
+  }
+
+  .btn-yes:hover {
+    transform: scale(1.08) translateY(-2px);
+  }
+
+  .btn-yes:active {
+    transform: scale(0.96);
+  }
+
+  .btn-no {
+    background: #FFB3B3;
+    color: #C0484A;
+    border: 2px solid #FFD0D0;
+    box-shadow: 0 4px 12px rgba(255,100,100,0.15);
+    font-size: 1.1rem;
+    position: relative;
+    z-index: 100;
+    transition: none;
+    pointer-events: auto;
+  }
+
+  .btn-no.escaped {
+    position: fixed;
+  }
+
+  /* Celebration overlay */
+  .celebration {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(255,248,231,0.95);
+    z-index: 1000;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.5s ease;
+  }
+
+  .celebration.active {
+    display: flex;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .celebration-emoji {
+    font-size: 5rem;
+    animation: bounceIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    margin-bottom: 20px;
+  }
+
+  @keyframes bounceIn {
+    from { transform: scale(0) rotate(-20deg); opacity: 0; }
+    to { transform: scale(1) rotate(0deg); opacity: 1; }
+  }
+
+  .celebration-text {
+    font-family: 'Kanit', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--dark);
+    text-align: center;
+    animation: slideUp 0.5s 0.2s ease both;
+    text-shadow: 2px 2px 0 rgba(244,168,53,0.4);
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  /* Firework canvas */
+  #fireworks {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  /* Mini meatball decorations */
+  .deco-ball {
+    font-size: 1.5rem;
+    position: absolute;
+    animation: spinFloat 4s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes spinFloat {
+    0%, 100% { transform: rotate(0deg) translateY(0); }
+    50% { transform: rotate(180deg) translateY(-10px); }
+  }
+</style>
+</head>
+<body>
+
+<!-- Background floating balls -->
+<div class="bg-ball" style="width:80px;height:80px;background:#F4A835;left:5%;animation-duration:12s;animation-delay:0s;"></div>
+<div class="bg-ball" style="width:50px;height:50px;background:#FF6B35;left:85%;animation-duration:9s;animation-delay:3s;"></div>
+<div class="bg-ball" style="width:120px;height:120px;background:#8B4513;left:15%;animation-duration:15s;animation-delay:1s;"></div>
+<div class="bg-ball" style="width:40px;height:40px;background:#F4A835;left:70%;animation-duration:10s;animation-delay:5s;"></div>
+<div class="bg-ball" style="width:90px;height:90px;background:#D2691E;left:50%;animation-duration:13s;animation-delay:2s;"></div>
+
+<canvas id="fireworks"></canvas>
+
+<!-- Celebration Screen -->
+<div class="celebration" id="celebration">
+  <div class="celebration-emoji">🎉🍡🎉</div>
+  <div class="celebration-text">เย้ๆๆ<br>เดี๋ยวไปซื้อมาให้นะะะ</div>
+  <div style="margin-top:30px;font-size:2.5rem;animation:bounceIn 0.6s 0.5s both;">🛍️✨🍡</div>
+</div>
+
+<!-- Main Card -->
+<div class="main-card">
+  <!-- Decorations -->
+  <div class="deco-ball" style="top:-15px;left:10px;animation-delay:0s;">🍡</div>
+  <div class="deco-ball" style="top:-15px;right:10px;animation-delay:1s;">✨</div>
+  <div class="deco-ball" style="bottom:-10px;left:20px;animation-delay:2s;">🧡</div>
+
+  <div class="meatball-scene">
+    <div class="skewer">
+      <div class="ball ball-1"></div>
+      <div class="ball ball-2"></div>
+      <div class="ball ball-3"></div>
+      <div class="steam steam-1"></div>
+      <div class="steam steam-2"></div>
+      <div class="steam steam-3"></div>
+      <div class="sauce-dot"></div>
+      <div class="sauce-dot"></div>
+      <div class="sauce-dot"></div>
+    </div>
+  </div>
+
+  <div class="question-text">พี่นุ่นอยากกิน<br>ลูกชิ้นทอดมั้ยยย 🍡</div>
+  <div class="sub-text">กอดหัวใจ 🧡 เลือกได้เลยนะ~</div>
+
+  <div class="btn-group" id="btnGroup">
+    <button class="btn btn-yes" id="yesBtn" onclick="celebrate()">ได้เลย 🎉</button>
+    <button class="btn btn-no" id="noBtn">ไม่</button>
+  </div>
+</div>
+
+<script>
+const noBtn = document.getElementById('noBtn');
+const btnGroup = document.getElementById('btnGroup');
+
+function moveNoBtn(e) {
+  const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+  const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+  if (!clientX) return;
+
+  noBtn.classList.add('escaped');
+
+  const margin = 20;
+  const w = noBtn.offsetWidth;
+  const h = noBtn.offsetHeight;
+
+  let newX, newY, attempts = 0;
+  do {
+    newX = Math.random() * (window.innerWidth - w - margin * 2) + margin;
+    newY = Math.random() * (window.innerHeight - h - margin * 2) + margin;
+    const dx = newX - clientX;
+    const dy = newY - clientY;
+    const dist = Math.sqrt(dx*dx + dy*dy);
+    attempts++;
+    if (dist >= 180 || attempts > 20) break;
+  } while (true);
+
+  noBtn.style.left = newX + 'px';
+  noBtn.style.top = newY + 'px';
+}
+
+noBtn.addEventListener('mouseover', moveNoBtn);
+noBtn.addEventListener('touchstart', moveNoBtn, {passive: true});
+
+// FIREWORKS
+const canvas = document.getElementById('fireworks');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+function createFirework(x, y) {
+  const colors = ['#FF6B35','#F4A835','#FF3399','#FFB5C8','#8B4513','#FFD700','#FF69B4','#00CED1'];
+  const emojis = ['🍡','✨','🧡','🌟','💛'];
+  for (let i = 0; i < 60; i++) {
+    const angle = (Math.PI * 2 / 60) * i;
+    const speed = 3 + Math.random() * 6;
+    particles.push({
+      x, y,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      size: 4 + Math.random() * 6,
+      life: 1,
+      decay: 0.015 + Math.random() * 0.01,
+      gravity: 0.1,
+    });
+  }
+}
+
+function launchFireworks() {
+  const positions = [
+    [window.innerWidth * 0.25, window.innerHeight * 0.3],
+    [window.innerWidth * 0.75, window.innerHeight * 0.3],
+    [window.innerWidth * 0.5, window.innerHeight * 0.2],
+    [window.innerWidth * 0.2, window.innerHeight * 0.6],
+    [window.innerWidth * 0.8, window.innerHeight * 0.5],
+  ];
+  positions.forEach((pos, i) => {
+    setTimeout(() => createFirework(pos[0], pos[1]), i * 200);
+  });
+  setTimeout(() => {
+    const cx = window.innerWidth / 2;
+    const cy = window.innerHeight / 2;
+    createFirework(cx, cy);
+    createFirework(cx - 100, cy + 50);
+    createFirework(cx + 100, cy + 50);
+  }, 1200);
+}
+
+function animateFireworks() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles = particles.filter(p => p.life > 0);
+  particles.forEach(p => {
+    ctx.save();
+    ctx.globalAlpha = p.life;
+    ctx.fillStyle = p.color;
+    ctx.shadowColor = p.color;
+    ctx.shadowBlur = 10;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+    p.x += p.vx;
+    p.y += p.vy;
+    p.vy += p.gravity;
+    p.vx *= 0.98;
+    p.life -= p.decay;
+    p.size *= 0.99;
+  });
+  requestAnimationFrame(animateFireworks);
+}
+animateFireworks();
+
+function celebrate() {
+  document.getElementById('celebration').classList.add('active');
+  launchFireworks();
+  // Keep launching
+  setTimeout(launchFireworks, 1500);
+  setTimeout(launchFireworks, 3000);
+}
+
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+</script>
+</body>
+</html>
