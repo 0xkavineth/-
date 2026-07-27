@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import {
   Lock, KeyRound, Users, FileCheck2, ArrowRight, Github, Twitter, Sparkles,
   Calculator, Scale, Landmark, LineChart, FileSignature, FolderLock, Receipt, MessageSquare,
@@ -1414,7 +1416,7 @@ function LoginPage({ setPage }) {
 // ---------------------------------------------
 // ROOT APP
 // ---------------------------------------------
-export default function OfficeSuiteLanding() {
+export default function LandingPage() {
   const [page, setPage] = useState("home");
 
   const PAGES = {
